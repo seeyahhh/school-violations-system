@@ -118,6 +118,8 @@ After seeding the database, you can log in with these default credentials:
 - Multiple violation categories and severity levels
 - Teacher and administrator roles with different permissions
 - Violation history and reporting
+
+  (Not Sure yet)
 - Email notifications for serious violations
 - Student and parent portal access
 - Export violation reports to PDF/Excel
