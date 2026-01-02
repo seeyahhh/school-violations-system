@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Users;
+use App\Models\User;
 use App\Models\ViolationRecord;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +17,7 @@ class ViolationRecordFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id'      => Users::inRandomOrder()->first()->id ?? 1,
+            'user_id'      => User::inRandomOrder()->first()->id ?? 1,
             'vio_sanct_id' => DB::table('violation_sanctions')->inRandomOrder()->value('id') ?? 1,
             'status_id'    => DB::table('status')->inRandomOrder()->value('id') ?? 1,
             'created_at'   => now(),

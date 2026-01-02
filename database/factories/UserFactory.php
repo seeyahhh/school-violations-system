@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -12,33 +12,24 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
-
-    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ];
-    }
+        $year = $this->faker->numberBetween(2015, 2026);
+        $randomDigits = str_pad($this->faker->numberBetween(1, 99999), 5, '0', STR_PAD_LEFT);
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return [
+            'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
+            'school_id'  => "{$year}-{$randomDigits}-MN-0", 
+            'email'      => $this->faker->unique()->safeEmail,
+            'password'   => Hash::make('secret'),
+            'role_id'    => DB::table('roles')->inRandomOrder()->value('id'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
     }
 }
