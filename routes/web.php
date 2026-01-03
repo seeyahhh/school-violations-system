@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ViolationsManagementController as AdminViolationsManagementController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SanctionController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\ViolationOverviewController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ Route::group(['middleware' => 'guest'], function () {
     // Post Login Form
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
- 
+
 
 // Authenticated Routes
 Route::group(['middleware' => 'auth'], function () {
@@ -31,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Dashboard Page
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
-        
+
         // Violations Management Page
         Route::get('/violations-management', [AdminViolationsManagementController::class, 'index'])->name('admin.violations-management.index');
     });
@@ -45,6 +46,10 @@ Route::group(['middleware' => 'auth'], function () {
         // Violation Overview Page
         Route::get('/violation-overview', [ViolationOverviewController::class, 'index'])->name('student.violation.overview');
     });
+
+    //Sanction (Trial)
+    Route::get('sanctions', [SanctionController::class, 'index'])
+        ->name('sanctions');
 
     //Logout user
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
