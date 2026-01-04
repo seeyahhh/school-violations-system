@@ -31,4 +31,9 @@ class ViolationRecord extends Model
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+
+    public function appeal()
+    {
+        return $this->hasOne(Appeal::class);
+    }
 }
