@@ -17,7 +17,7 @@ class DashboardController extends Controller
          ->get();
          
         $violationCount = $violationRecords->count();
-
+ 
         // compact data to frontend
         return view('student.dashboard', compact('user','violationCount', 'violationRecords'));
     }
