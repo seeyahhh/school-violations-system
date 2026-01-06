@@ -15,14 +15,16 @@
     <!-- Navigation -->
     <div class="offcanvas-body d-flex flex-column p-0">
         <nav class="nav flex-column mt-3">
-            <a href="{{ route('admin.dashboard.index') }}" class="nav-link text-white d-flex align-items-center py-2 px-4 mx-3 rounded-pill">
+            <a href="{{ route('admin.dashboard.index') }}" class="nav-link text-white d-flex align-items-center py-2 px-4 mx-3 rounded-pill 
+            {{ request()->routeIs('admin.dashboard.index') ? 'active bg-red fw-bold' : '' }}">
                 <i class="bi bi-house-door me-3 fs-5"></i> Home
             </a>
 
-            <a href="{{ route('admin.violations-management.index') }}" class="nav-link text-white fw-bold d-flex align-items-center py-2 px-4 mx-3 rounded-pill"
-                style="background-color: rgba(255,255,255,0.25);">
+            <a href="{{ route('admin.violations-management.index') }}" class="nav-link text-white  d-flex align-items-center py-2 px-4 mx-3 rounded-pill
+                 {{ request()->routeIs('admin.violations-management.index') ? 'active bg-red fw-bold' : '' }}">
                 <i class="bi bi-file-text me-3 fs-5"></i> Violations
             </a>
+
 
             <a href="#" class="nav-link text-white d-flex align-items-center py-2 px-4 mx-3 rounded-pill">
                 <i class="bi bi-award me-3 fs-5"></i> Sanctions

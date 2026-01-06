@@ -3,18 +3,19 @@ $bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
 $primary: #800000;
 
 $custom-colors: (
-  "dark-tertiary": #e9e9e9
+    "dark-tertiary": #e9e9e9,
+    "red": #9A2A2A    
 );
 
 $theme-colors: (
-  "primary": $primary,
-  "secondary": #6c757d,
-  "success": #198754,
-  "info": #0dcaf0,
-  "warning": #ffc107,
-  "danger": #dc3545,
-  "light": #f8f9fa,
-  "dark": #212529
+    "primary": $primary,
+    "secondary": #6c757d,
+    "success": #198754,
+    "info": #0dcaf0,
+    "warning": #ffc107,
+    "danger": #dc3545,
+    "light": #f8f9fa,
+    "dark": #212529,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
