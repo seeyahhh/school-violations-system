@@ -43,7 +43,7 @@
                                         <span class="input-group-text border-0" style="background-color: #eb5757; color: white; padding: 12px 16px;">
                                             <i class="bi bi-briefcase-fill"></i>
                                         </span>
-                                        <input type="password" class="form-control border-0" name="password" placeholder="••••••••••••" style="padding: 12px;">
+                                        <input type="password" class="form-control border-0" name="password" placeholder="Password" style="padding: 12px;">
                                         <span class="input-group-text border-0 bg-white text-muted">
                                             <i class="bi bi-eye-slash "></i>
                                         </span>

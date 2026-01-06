@@ -21,3 +21,12 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
+
+input:focus,
+textarea:focus,
+select:focus,
+.form-control:focus {
+  outline: none; 
+  box-shadow: none ;
+  border-color: inherit ;
+}
