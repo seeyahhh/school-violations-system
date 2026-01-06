@@ -134,13 +134,20 @@
                             <div class="d-flex align-items-center m-4 text-muted">
                                 <i class="fas fa-filter me-2" style="font-size: 0.9rem;"></i>
                                 <span class="small me-2">Filter by:</span>
-                                <select class="form-select form-select-sm w-auto border-secondary-subtle rounded-3"
-                                    style="font-size: 0.85rem; color: #4b5563;">
-                                    <option value="all" selected>All status</option>
-                                    <option value="in-progress">In progress</option>
-                                    <option value="under-review">Under review</option>
-                                    <option value="resolved">Resolved</option>
-                                </select>
+                                <form action="{{ route('student.dashboard.index') }}" method="get">
+                                    <select class="form-select form-select-sm w-auto border-secondary-subtle rounded-3"
+                                        style="font-size: 0.85rem; color: #4b5563;" name="status"
+                                        onchange="this.form.submit()">
+
+                                        <option value="all">All status</option>
+
+                                        @foreach ($statuses as $status)
+                                        <option value="{{ $status->id }}" {{ request('status')==$status->id ? 'selected'
+                                            : '' }}>{{ $status->status_name }}</option>
+                                        @endforeach
+
+                                    </select>
+                                </form>
                             </div>
                             <div class="m-4">
                                 {{-- Note --}}
@@ -244,7 +251,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="6" class="text-center py-5 text-muted">No records found.</td>
+                                            <td colspan="8" class="text-center py-5 text-muted">No records found.</td>
                                         </tr>
                                         @endforelse
                                     </tbody>
@@ -252,11 +259,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer row bg-white border-0 py-3 ps-4">
+                    <div class="card-footer bg-white border-0">
                         <small id="showingCount" class="text-muted col">
                             Showing {{ $violationRecords->count() }} of {{ $violationCount }} violations
                         </small>
-
                     </div>
                 </div>
             </div>
