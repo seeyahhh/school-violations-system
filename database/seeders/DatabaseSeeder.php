@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ViolationSanctionSqlSeeder::class,
             UserSeeder::class,
             ViolationRecordSeeder::class,
+            AppealSeeder::class,
         ]);
 
         // User::factory(10)->create();

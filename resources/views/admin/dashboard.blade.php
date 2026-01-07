@@ -1,44 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
-@section('title', 'Admin Dashboard - Violations')
-@section('page-title', 'Admin Dashboard')
-
+@section('navbar-title', 'Violation and Sanction Management')
 @section('content')
-    
-    <div class="row g-3 mb-4">
-        <div class="col-lg-3 col-md-6">
-            <div class="card border-0 shadow-sm p-3 h-100">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div><h6 class="text-muted mb-1">Total Violations</h6><h2 class="fw-bold mb-0" style="color: #800000;">{{ $violationRecordCount }}</h2></div>
-                    <div class="rounded p-2" style="background-color: #ffebee; color: #800000;"><i class="fas fa-exclamation-circle fa-2x"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card border-0 shadow-sm p-3 h-100">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div><h6 class="text-muted mb-1">Pending</h6><h2 class="fw-bold mb-0 text-warning">{{ $pendingCount }}</h2></div>
-                    <div class="rounded p-2" style="background-color: #fff8e1; color: #ffc107;"><i class="fas fa-clock fa-2x"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card border-0 shadow-sm p-3 h-100">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div><h6 class="text-muted mb-1">Under Review</h6><h2 class="fw-bold mb-0 text-info">{{ $under_reviewCount }}</h2></div>
-                    <div class="rounded p-2" style="background-color: #e0f7fa; color: #0dcaf0;"><i class="fas fa-file-alt fa-2x"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card border-0 shadow-sm p-3 h-100">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div><h6 class="text-muted mb-1">Resolved</h6><h2 class="fw-bold mb-0 text-success">{{ $resolvedCount }}</h2></div>
-                    <div class="rounded p-2" style="background-color: #e8f5e9; color: #198754;"><i class="fas fa-check-circle fa-2x"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container-fluid w-100">
+    <div class="">Admin</div>
+    <form action="{{ route('logout')}}" method="POST">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
 
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
@@ -361,67 +330,6 @@
             </div>
         </div>
     </div>
+</div>
 
-@endsection
-
-@section('scripts')
-<script>
-    // Filter Logic
-    function filterTable() {
-        var filter = document.getElementById("statusFilter").value.toUpperCase();
-        var rows = document.getElementById("violationTableBody").getElementsByTagName("tr");
-        var visibleCount = 0;
-        for (var i = 0; i < rows.length; i++) {
-            var statusCol = rows[i].getElementsByTagName("td")[6]; 
-            if (statusCol) {
-                var txtValue = statusCol.textContent || statusCol.innerText;
-                if (filter === "ALL" || txtValue.toUpperCase().trim() === filter) {
-                    rows[i].style.display = ""; visibleCount++;
-                } else { rows[i].style.display = "none"; }
-            }
-        }
-        document.getElementById("rowCounter").innerText = "Showing " + visibleCount + " violations";
-    }
-
-    // View Modal Logic 
-    function viewCase(button) {
-        document.getElementById('view_case_id').innerText = button.getAttribute('data-id');
-        document.getElementById('view_student_id').innerText = button.getAttribute('data-student-id');
-        document.getElementById('view_student_name').innerText = button.getAttribute('data-student-name');
-        document.getElementById('view_violation').innerText = button.getAttribute('data-violation');
-        document.getElementById('view_date').innerText = button.getAttribute('data-date');
-        document.getElementById('view_offense').innerText = button.getAttribute('data-offense');
-        document.getElementById('view_sanction').innerText = button.getAttribute('data-sanction');
-        document.getElementById('view_description').innerText = button.getAttribute('data-description');
-
-        var status = button.getAttribute('data-status');
-        var badge = document.getElementById('view_status');
-        badge.innerText = status;
-        badge.className = 'badge'; 
-        if(status.includes('Pending')) badge.classList.add('badge-pending');
-        else if(status.includes('Review')) badge.classList.add('badge-review');
-        else if(status.includes('Resolved')) badge.classList.add('badge-resolved');
-        else badge.classList.add('bg-secondary');
-
-        new bootstrap.Modal(document.getElementById('viewViolationModal')).show();
-    }
-
-
-    function editCase(id) { new bootstrap.Modal(document.getElementById('editViolationModal')).show(); }
-    
-    let deleteModal;
-    function confirmDelete(id) {
-        document.getElementById('delete_id_storage').value = id;
-        deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
-        deleteModal.show();
-    }
-    function executeDelete() {
-        alert("Deleting ID: " + document.getElementById('delete_id_storage').value);
-        deleteModal.hide();
-    }
-    function submitLog(e) {
-        e.preventDefault(); alert("Logged!");
-        bootstrap.Modal.getInstance(document.getElementById('logViolationModal')).hide();
-    }
-</script>
 @endsection

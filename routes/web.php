@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ViolationsManagementController as AdminViolationsManagementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SanctionController;
+use App\Http\Controllers\Student\AppealController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\ViolationOverviewController;
 use Illuminate\Support\Facades\Route;
@@ -42,10 +43,12 @@ Route::group(['middleware' => 'auth'], function () {
 
         // User Dashboard Page
         Route::get('/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard.index');
-        
+
         // Violation Overview Page
         Route::get('/violation-overview', [ViolationOverviewController::class, 'index'])->name('student.violation.overview');
-    }); 
+
+        Route::post('/appeal', [AppealController::class, 'store'])->name('appeal.store');
+    });
 
     //Sanction (Trial)
     Route::get('sanctions', [SanctionController::class, 'index'])

@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
-INSERT INTO `status` VALUES (1,'Under review',NULL,NULL,NULL),(2,'In progress',NULL,NULL,NULL),(3,'Resolved',NULL,NULL,NULL);
+INSERT INTO `status` VALUES (1,'Under review',NULL,NULL,NULL),(2,'In progress',NULL,NULL,NULL),(3,'Resolved',NULL,NULL,NULL),(4,'Sanction revoked', NULL,NULL,NULL);
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 

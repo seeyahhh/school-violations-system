@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('appeals', function (Blueprint $table) {
             $table->id();
-            $table->string('appeal_content');
+            $table->text('appeal_content');
             $table->foreignId('violation_record_id')->constrained('violation_records')->onDelete('cascade');
             $table->boolean('is_accepted')->default(false);
             $table->timestamps();
