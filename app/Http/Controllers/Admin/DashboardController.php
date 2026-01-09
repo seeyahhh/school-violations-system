@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Violation;
 use Illuminate\Http\Request;
 use App\Models\ViolationRecord;
 
 class DashboardController extends Controller
 {
-    public function index() {
+    public function index()
+    {
+        $violations = Violation::all();
 
         $violationRecords = ViolationRecord::all();
 
@@ -20,6 +23,6 @@ class DashboardController extends Controller
 
         $resolvedCount = ViolationRecord::where('status_id', 3)->count();
 
-        return view('admin.dashboard', compact('violationRecords', 'violationRecordCount', 'under_reviewCount', 'pendingCount', 'resolvedCount'));
+        return view('admin.dashboard', compact('violations', 'violationRecords', 'violationRecordCount', 'under_reviewCount', 'pendingCount', 'resolvedCount'));
     }
 }
