@@ -3,12 +3,6 @@
 @section('navbar-title', 'Violation and Sanction Management')
 @section('content')
 <div class="container-fluid w-100">
-    <div class="">Admin</div>
-    <form action="{{ route('logout')}}" method="POST">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
-
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
             <h5 class="fw-bold mb-0">Violation Logs</h5>
@@ -28,52 +22,56 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <select class="form-select text-muted" id="statusFilter" onchange="filterTable()">
-                        <option value="all">All Status</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Under Review">Under Review</option>
-                        <option value="Resolved">Resolved</option>
-                    </select>
+                    <form action="{{ route('admin.dashboard.index') }}" method="get">
+                        <select class="form-select border-start-0" style="font-size: 0.85rem; color: #4b5563;"
+                            name="status" onchange="this.form.submit()">
+
+                            <option value="all">All status</option>
+
+                            @foreach ($statuses as $status)
+                            <option value="{{ $status->id }}" {{ request('status')==$status->id ? 'selected'
+                                : '' }}>{{ $status->status_name }}</option>
+                            @endforeach
+
+                        </select>
+                    </form>
                 </div>
             </div>
 
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
-                        <tr>
-                            <th>Case ID</th>
-                            <th>Student ID</th>
-                            <th>Student Name</th>
-                            <th>Violation Type</th>
-                            <th>Date</th>
-                            <th>Record</th>
-                            <th>Status</th>
-                            <th>Sanction</th>
-                            <th class="text-center">Actions</th>
+                        <tr class="text-nowrap">
+                            <th class="">Case ID</th>
+                            <th class="text-center">Student ID</th>
+                            <th class="">Student Name</th>
+                            <th class="">Violation Type</th>
+                            <th class="">Date</th>
+                            <th class="">Record</th>
+                            <th class="">Status</th>
+                            {{-- <th class="">Sanction</th> --}}
+                            <th class="" class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="violationTableBody">
                         @forelse($violationRecords as $record)
                         <tr>
-                            <td class="fw-bold text-danger">V-{{ date('Y') }}-{{ $record->id }}</td>
-
-                            <td>{{ $record->user->student_number ?? 'N/A' }}</td>
-                            <td class="fw-bold">{{ $record->user->name ?? 'Unknown Student' }}</td>
-
-                            <td>{{ $record->violationSanction->violation->name ?? 'N/A' }}</td>
-                            <td>{{ $record->created_at->format('Y-m-d') }}</td>
-
+                            <td class="fw-bold text-danger text-nowrap">V-{{ date('Y') }}-{{ $record->id }}</td>
+                            <td class="text-nowrap text-center">{{ $record->user->id}}</td>
+                            <td class="text-nowrap" class="fw-bold">{{ $record->user->first_name.' '.$record->user->last_name}}</td>
+                            <td class="">{{ $record->violationSanction->violation->violation_name}}</td>
+                            <td class="text-nowrap">{{ $record->created_at->format('Y-m-d') }}</td>
                             <td>
-                                <x-offense-badge :offense="$record->violationSanction->offense_level" />
+                                <x-offense-badge :offense="$record->violationSanction->no_of_offense" />
                             </td>
 
                             <td>
                                 <x-status-badge :status="$record->status->status_name" />
                             </td>
 
-                            <td>{{ $record->violationSanction->sanction->name ?? 'N/A' }}</td>
+                            {{-- <td>{{ $record->violationSanction->sanction->name ?? 'N/A' }}</td> --}}
 
-                            <td class="text-center">
+                            <td class="text-center text-nowrap">
                                 <button class="btn-action-view" onclick="viewCase(this)"
                                     data-id="V-{{ date('Y') }}-{{ $record->id }}"
                                     data-student-id="{{ $record->user->student_number ?? 'N/A' }}"
@@ -141,25 +139,19 @@
                             </select>
                         </div>
 
-                        {{-- Not Needed --}}
-                        {{-- <div class="mb-3"><label class="fw-bold">Sanction</label>
-                            <span>{{ $violation }}</span>
+                        <div class="mb-3">
+                            <label class="fw-bold">
+                                Notes
+                            </label>
+                            <textarea class="form-control" rows="3"></textarea>
                         </div>
-                        <div class="mb-3"><label class="fw-bold">Offense</label>
-                            <select class="form-select">
-                                <option>First Offense</option>
-                                <option>Second Offense</option>
-                                <option>Third Offense</option>
-                                <option>Fourth Offense</option>
-                            </select>
-                        </div> --}}
-
-                        <div class="mb-3"><label class="fw-bold">Notes</label><textarea class="form-control"
-                                rows="3"></textarea></div>
                         <div class="d-flex justify-content-end gap-2 mt-4">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn text-white" style="background-color: #800000;">Log
-                                Violation</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn text-white" style="background-color: #800000;">
+                                Log Violation
+                            </button>
                         </div>
                     </form>
                 </div>

@@ -1,9 +1,15 @@
 <div>
-    @if($offense == 'First Offense')
-    <span class="badge badge-offense-1">FIRST OFFENSE</span>
-    @elseif($offense == 'Second Offense')
-    <span class="badge badge-offense-2">SECOND OFFENSE</span>
-    @elseif($offense == 'Third Offense')
-    <span class="badge badge-offense-3">THIRD OFFENSE</span>
+    @if($offense == 1)
+    <span class="badge bg-info text-uppercase" style="font-size: 12px;">
+        First Offense
+    </span>
+    @elseif($offense == 2)
+    <span class="badge bg-warning text-dark text-uppercase" style="font-size: 12px;">
+        Second Offense
+    </span>
+    @else
+    <span class="badge bg-danger text-uppercase" style="font-size: 12px;">
+        Third Offense
+    </span>
     @endif
 </div>

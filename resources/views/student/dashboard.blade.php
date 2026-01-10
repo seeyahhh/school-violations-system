@@ -178,20 +178,8 @@
                                             <td class="small text-muted">{{
                                                 \Carbon\Carbon::parse($record->created_at)->format('Y-m-d') }}</td>
                                             <td class="small">
-                                                @if($record->violationSanction->no_of_offense == 1)
-                                                <span class="badge bg-info text-uppercase" style="font-size: 12px;">
-                                                    First Offense
-                                                </span>
-                                                @elseif($record->violationSanction->no_of_offense == 2)
-                                                <span class="badge bg-warning text-dark text-uppercase"
-                                                    style="font-size: 12px;">
-                                                    Second Offense
-                                                </span>
-                                                @else
-                                                <span class="badge bg-danger text-uppercase" style="font-size: 12px;">
-                                                    Third Offense
-                                                </span>
-                                                @endif
+                                                <x-offense-badge :offense="$record->violationSanction->no_of_offense" />
+
                                             </td>
                                             <td>
                                                 <x-status-badge :status="$record->status->status_name" />
@@ -200,10 +188,6 @@
                                             </td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-2 align-items-center">
-                                                    {{-- View Icon --}}
-                                                    {{-- <i class="bi bi-eye-fill text-black fs-4 point"
-                                                        role="button"></i> --}}
-
                                                     @if ($record->canBeAppealed())
                                                     <button class="btn btn-sm btn-danger px-3 rounded-2 fw-bold"
                                                         style="font-size: 11px;" data-bs-toggle="modal"
