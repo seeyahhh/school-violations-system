@@ -114,8 +114,6 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-=======
     <div class="modal fade" id="logViolationModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content border-0">
@@ -285,7 +283,6 @@
         </div>
     </div>
 
->>>>>>> 1bca81e (feat(admin): added ability to log new violations)
     <div class="modal fade" id="deleteConfirmationModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">

@@ -41,8 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
         //Sanction Page
         Route::get('/sanction', [SanctionController::class, 'index'])->name('admin.sanction');
 
-        //TEST: For visual confirmation of successful insertion: 
-        Route::post('/test', [AdminViolationsManagementController::class, 'logViolation'])->name('admin.violations-management.logViolation');
+        // Posting violation
+        Route::post('/log-violation', [ViolationController::class, 'store'])->name('admin.violations-management.logViolation');
 
         //Violation Resource (in case of refactor)
         Route::resource('/violations-management', ViolationController::class);
