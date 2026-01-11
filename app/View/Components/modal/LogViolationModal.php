@@ -22,6 +22,6 @@ class LogViolationModal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.log-violation-modal');
+        return view('components.modals.log-violation-modal');
     }
 }

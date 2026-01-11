@@ -25,6 +25,6 @@ class AppealModal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.appeal-modal');
+        return view('components.modals.appeal-modal');
     }
 }
