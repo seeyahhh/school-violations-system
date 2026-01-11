@@ -17,11 +17,6 @@
                 <img src="/student.png" alt="StudentLogo" class="me-2" style="width: 30px;">
                 Student Portal
             </span>
-            <div class="d-flex align-items-center">
-                <div class="position-relative me-4" style="cursor: pointer;">
-                    <img src="/bell.png" alt="Notifications" style="width: 24px; height: 24px; object-fit: contain;">
-                </div>
-            </div>
         </div>
     </nav>
 
