@@ -56,7 +56,7 @@
                         <div id="view_date">
                             {{ $record->created_at->format('M/d/Y') }}
                         </div>
-                    </div>D
+                    </div>
                     <div class="col-md-6">
                         <small class="text-muted fw-bold" style="font-size: 0.75rem;">
                             RECORD

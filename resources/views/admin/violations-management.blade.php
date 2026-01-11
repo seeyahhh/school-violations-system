@@ -17,16 +17,15 @@
             <div class="row mb-3 g-2">
                 <div class="col-md-8">
                     <div class="input-group">
-                        <span class="input-group-text bg-white border-end-0"><i
-                                class="fas fa-search text-muted"></i></span>
-                        <input type="text" class="form-control border-start-0"
-                            placeholder="Search by student name or ID...">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Search by student name or ID...">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <form action="{{ route('violations-management.index') }}" method="get">
-                        <select class="form-select border-start-0" style="font-size: 0.85rem; color: #4b5563;"
-                            name="status" onchange="this.form.submit()">
+                        <select class="form-select" name="status" onchange="this.form.submit()">
 
                             <option value="all">All status</option>
 
@@ -44,25 +43,20 @@
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr class="text-nowrap">
-                            <th class="">Case ID</th>
                             <th class="text-center">Student ID</th>
                             <th class="">Student Name</th>
                             <th class="">Violation Type</th>
                             <th class="">Date</th>
                             <th class="">Record</th>
                             <th class="">Status</th>
-                            {{-- <th class="">Sanction</th> --}}
                             <th class="" class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="violationTableBody">
                         @forelse($violationRecords as $record)
-                        <tr>
-                            <td class="fw-bold text-danger text-nowrap">
-                                V-{{ date('Y') }}-{{ $record->id }}
-                            </td>
-                            <td class="text-nowrap text-center">
-                                {{ $record->user->id}}
+                        <tr data-bs-toggle="modal" data-bs-target="#viewViolationModal-{{ $record->id }}" role="button">
+                            <td class="fw-bold text-nowrap text-center text-danger">
+                                {{ $record->user->school_id}}
                             </td>
                             <td class="text-nowrap" class="fw-bold">
                                 {{ $record->user->first_name.' '.$record->user->last_name}}
@@ -85,10 +79,6 @@
 
                             <td class="text-center text-nowrap">
                                 <button class="btn-action-view" data-bs-toggle="modal"
-                                    data-bs-target="#viewViolationModal-{{ $record->id }}">
-                                    <i class="bi bi-eye-fill"></i>
-                                </button>
-                                <button class="btn-action-view" data-bs-toggle="modal"
                                     data-bs-target="#editViolationModal-{{ $record->id }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
@@ -96,9 +86,12 @@
                                     <i class="bi bi-trash text-red"></i>
                                 </button>
                             </td>
-                            <x-modals.view-violation :record="$record" :id="'viewViolationModal-'.$record->id" />
-                            <x-modals.edit-violation :record="$record" :id="'editViolationModal-'.$record->id" :violations="$violations"/>
                         </tr>
+
+                        <x-modals.view-violation :record="$record" :id="'viewViolationModal-'.$record->id" />
+                        <x-modals.edit-violation :record="$record" :id="'editViolationModal-'.$record->id"
+                            :violations="$violations" />
+
                         @empty
                         <tr>
                             <td colspan="9" class="text-center text-muted py-4">No violation records found.</td>
