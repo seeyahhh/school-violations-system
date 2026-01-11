@@ -8,8 +8,10 @@
             <h5 class="fw-bold mb-0">Violation Logs</h5>
             <button class="btn text-white" style="background-color: #800000;" data-bs-toggle="modal"
                 data-bs-target="#logViolationModal">
-                <i class="fas fa-plus me-1"></i> Log Violation
+                <i class="fas fa-plus me-1"></i>
+                Log Violation
             </button>
+            <x-modals.log-violation :violations="$violations" />
         </div>
         <div class="card-body">
             <div class="row mb-3 g-2">
@@ -56,11 +58,21 @@
                     <tbody id="violationTableBody">
                         @forelse($violationRecords as $record)
                         <tr>
-                            <td class="fw-bold text-danger text-nowrap">V-{{ date('Y') }}-{{ $record->id }}</td>
-                            <td class="text-nowrap text-center">{{ $record->user->id}}</td>
-                            <td class="text-nowrap" class="fw-bold">{{ $record->user->first_name.' '.$record->user->last_name}}</td>
-                            <td class="">{{ $record->violationSanction->violation->violation_name}}</td>
-                            <td class="text-nowrap">{{ $record->created_at->format('Y-m-d') }}</td>
+                            <td class="fw-bold text-danger text-nowrap">
+                                V-{{ date('Y') }}-{{ $record->id }}
+                            </td>
+                            <td class="text-nowrap text-center">
+                                {{ $record->user->id}}
+                            </td>
+                            <td class="text-nowrap" class="fw-bold">
+                                {{ $record->user->first_name.' '.$record->user->last_name}}
+                            </td>
+                            <td class="">
+                                {{ $record->violationSanction->violation->violation_name}}
+                            </td>
+                            <td class="text-nowrap">
+                                {{ $record->created_at->format('Y-m-d') }}
+                            </td>
                             <td>
                                 <x-offense-badge :offense="$record->violationSanction->no_of_offense" />
                             </td>
@@ -72,19 +84,10 @@
                             {{-- <td>{{ $record->violationSanction->sanction->name ?? 'N/A' }}</td> --}}
 
                             <td class="text-center text-nowrap">
-                                <button class="btn-action-view" onclick="viewCase(this)"
-                                    data-id="V-{{ date('Y') }}-{{ $record->id }}"
-                                    data-student-id="{{ $record->user->student_number ?? 'N/A' }}"
-                                    data-student-name="{{ $record->user->name ?? 'Unknown' }}"
-                                    data-violation="{{ $record->violationSanction->violation->name ?? 'N/A' }}"
-                                    data-date="{{ $record->created_at->format('Y-m-d') }}"
-                                    data-offense="{{ $record->violationSanction->offense_level ?? 'N/A' }}"
-                                    data-status="{{ $record->status->name ?? 'Unknown' }}"
-                                    data-sanction="{{ $record->violationSanction->sanction->name ?? 'N/A' }}"
-                                    data-description="{{ $record->description ?? 'No specific description provided.' }}">
+                                <button class="btn-action-view" data-bs-toggle="modal"
+                                    data-bs-target="#viewViolationModal-{{ $record->id }}">
                                     <i class="bi bi-eye-fill"></i>
                                 </button>
-
                                 <button class="btn-action-edit" onclick="editCase('{{ $record->id }}')">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
@@ -92,6 +95,7 @@
                                     <i class="bi bi-trash text-red"></i>
                                 </button>
                             </td>
+                            <x-modals.view-violation :record="$record" :id="'viewViolationModal-'.$record->id" />
                         </tr>
                         @empty
                         <tr>
@@ -104,111 +108,6 @@
             <div class="d-flex flex-column justify-content-end align-items-end mx-3">
                 <small class="text-muted" id="rowCounter">Showing {{ $violationRecordCount }} violations</small>
                 <span class="">{{ $violationRecords->links() }}</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="logViolationModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content border-0">
-                <div class="modal-header modal-header-maroon">
-                    <h5 class="modal-title fw-bold">Log New Violation</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <form onsubmit="submitLog(event)">
-                        <div class="mb-3">
-                            <label for="student_id" class="fw-bold">
-                                Student ID / User ID
-                            </label>
-                            <input id="student_id" name="student_id" type="text" class="form-control"
-                                placeholder="e.g. 2021-12345-MN-0">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="violation_type" class="form-label fw-bold">
-                                Violation Type
-                            </label>
-
-                            <select id="violation_type" name="violation_id" class="form-select">
-                                @foreach ($violations as $violation)
-                                <option value="{{ $violation->id }}">
-                                    {{ Str::limit($violation->violation_name, 90) }}
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="fw-bold">
-                                Notes
-                            </label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="d-flex justify-content-end gap-2 mt-4">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Cancel
-                            </button>
-                            <button type="submit" class="btn text-white" style="background-color: #800000;">
-                                Log Violation
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="viewViolationModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content border-0">
-                <div class="modal-header modal-header-teal">
-                    <h5 class="modal-title fw-bold">Violation Details</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <div class="row g-4">
-                        <div class="col-md-6"><small class="text-muted fw-bold" style="font-size: 0.75rem;">CASE
-                                ID</small>
-                            <div class="text-danger fw-bold fs-5" id="view_case_id">...</div>
-                        </div>
-                        <div class="col-md-6"><small class="text-muted fw-bold"
-                                style="font-size: 0.75rem;">STATUS</small>
-                            <div><span class="badge" id="view_status">...</span></div>
-                        </div>
-                        <div class="col-md-6"><small class="text-muted fw-bold" style="font-size: 0.75rem;">STUDENT
-                                ID</small>
-                            <div class="fw-bold" id="view_student_id">...</div>
-                        </div>
-                        <div class="col-md-6"><small class="text-muted fw-bold" style="font-size: 0.75rem;">STUDENT
-                                NAME</small>
-                            <div class="fw-bold" id="view_student_name">...</div>
-                        </div>
-                        <div class="col-md-6"><small class="text-muted fw-bold" style="font-size: 0.75rem;">VIOLATION
-                                TYPE</small>
-                            <div id="view_violation">...</div>
-                        </div>
-                        <div class="col-md-6"><small class="text-muted fw-bold" style="font-size: 0.75rem;">DATE</small>
-                            <div id="view_date">...</div>
-                        </div>
-                        <div class="col-md-6"><small class="text-muted fw-bold"
-                                style="font-size: 0.75rem;">RECORD</small>
-                            <div id="view_offense">...</div>
-                        </div>
-                        <div class="col-md-6"><small class="text-muted fw-bold"
-                                style="font-size: 0.75rem;">SANCTION</small>
-                            <div id="view_sanction">...</div>
-                        </div>
-                        <div class="col-12"><small class="text-muted fw-bold"
-                                style="font-size: 0.75rem;">DESCRIPTION</small>
-                            <div class="p-3 bg-light rounded border text-muted" id="view_description">...</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn text-white px-4" style="background-color: #800000;"
-                        data-bs-dismiss="modal">Close</button>
-                </div>
             </div>
         </div>
     </div>

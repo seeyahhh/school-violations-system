@@ -204,7 +204,7 @@
                                                     </button>
                                                     @endif
                                                 </div>
-                                                <x-appeal-modal :violation="$record" :id="'appealModal-'.$record->id" />
+                                                <x-modals.request-appeal :violation="$record" :id="'appealModal-'.$record->id" />
 
                                             </td>
                                         </tr>

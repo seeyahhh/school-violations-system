@@ -1,22 +1,21 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\modal;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class AppealModal extends Component
+class ViewViolation extends Component
 {
-
-    public $violation;
+    public $record;
     public $id;
     /**
      * Create a new component instance.
      */
-    public function __construct($violation, $id)
+    public function __construct($record, $id)
     {
-        $this->violation = $violation;
+        $this->record = $record;
         $this->id = $id;
     }
 
@@ -25,6 +24,6 @@ class AppealModal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.appeal-modal');
+        return view('components.modals.view-violation');
     }
 }
