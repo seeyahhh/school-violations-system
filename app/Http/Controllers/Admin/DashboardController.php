@@ -29,7 +29,7 @@ class DashboardController extends Controller
             ->get();
 
         $recentAppeals = Appeal::with(['violationRecord.user', 'violationRecord.violationSanction.violation'])
-            ->latest()
+            ->latest('updated_at')
             ->take(4)
             ->get();
 

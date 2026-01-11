@@ -40,7 +40,7 @@
             </div>
 
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
+                <table class="table table-hover table-striped align-middle">
                     <thead class="table-light">
                         <tr class="text-nowrap">
                             <th class="text-center">Student ID</th>
