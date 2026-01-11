@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\SanctionController;
 use App\Http\Controllers\Admin\ViolationController;
-use App\Http\Controllers\Admin\ViolationsManagementController;
+use App\Http\Controllers\Admin\ViolationsManagementController as AdminViolationsManagementController;
 use App\Http\Controllers\Student\AppealController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\ViolationOverviewController;
@@ -36,10 +36,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
 
         // Violations Management Page
-        Route::get('/violations-management', [ViolationsManagementController::class, 'index'])->name('admin.violations-management.index');
+        Route::get('/violations-management', [AdminViolationsManagementController::class, 'index'])->name('admin.violations-management.index');
 
         //Sanction Page
         Route::get('/sanction', [SanctionController::class, 'index'])->name('admin.sanction');
+
+        //TEST: For visual confirmation of successful insertion: 
+        Route::post('/test', [AdminViolationsManagementController::class, 'logViolation'])->name('admin.violations-management.logViolation');
 
         //Violation Resource (in case of refactor)
         Route::resource('/violations-management', ViolationController::class);

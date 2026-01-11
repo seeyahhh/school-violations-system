@@ -54,7 +54,7 @@
                             DATE
                         </small>
                         <div id="view_date">
-                            {{ $record->violationSanction->created_at->format('M/d/Y') }}
+                            {{   $record->created_at->format('M/d/Y') }}
                         </div>
                     </div>
                     <div class="col-md-6">
