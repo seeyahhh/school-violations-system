@@ -6,18 +6,15 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class AppealModal extends Component
+class LogViolation extends Component
 {
-
-    public $violation;
-    public $id;
+    public $violations;
     /**
      * Create a new component instance.
      */
-    public function __construct($violation, $id)
+    public function __construct($violations)
     {
-        $this->violation = $violation;
-        $this->id = $id;
+        $this->violations = $violations;
     }
 
     /**
@@ -25,6 +22,6 @@ class AppealModal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.modals.appeal-modal');
+        return view('components.modals.log-violation');
     }
 }

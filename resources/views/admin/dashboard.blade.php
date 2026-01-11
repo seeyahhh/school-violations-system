@@ -11,7 +11,7 @@
                 <i class="fas fa-plus me-1"></i>
                 Log Violation
             </button>
-            <x-modals.log-violation-modal :violations="$violations" />
+            <x-modals.log-violation :violations="$violations" />
         </div>
         <div class="card-body">
             <div class="row mb-3 g-2">
