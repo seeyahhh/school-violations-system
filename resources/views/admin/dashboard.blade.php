@@ -116,7 +116,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <form onsubmit="submitLog(event)">
+                    <form action="{{ route('admin.violations-management.logViolation') }}">
                         <div class="mb-3">
                             <label for="student_id" class="fw-bold">
                                 Student ID / User ID
