@@ -7,9 +7,12 @@ use App\Models\Status;
 use App\Models\Violation;
 use App\Models\ViolationRecord;
 use App\Models\Appeal;
+use App\Models\User;
 use Illuminate\Http\Request;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
 class DashboardController extends Controller
 {
@@ -33,20 +36,7 @@ class DashboardController extends Controller
             ->take(4)
             ->get();
 
-        $chartOptions = [
-            'chart_title' => 'Violations in past 7 Days',
-            'report_type' => 'group_by_date',
-            'model' => 'App\Models\ViolationRecord',
-            'group_by_field' => 'created_at',
-            'chart_type' => 'bar',
-            'chart_color' => '255, 215, 215',
-            'group_by_period' => 'day',
-            'aggregate_function' => 'count',
-            'filter_field' => 'created_at',
-            'filter_days' => 7,
-        ];
-
-        $violationsChart = new LaravelChart($chartOptions);
+        $violationsChart = $this->violationsChart();
 
         return view('admin.dashboard', compact(
             'summary',
@@ -54,5 +44,67 @@ class DashboardController extends Controller
             'recentAppeals',
             'violationsChart'
         ));
+    }
+
+    private function violationsChart()
+    {
+        $start = Carbon::now()->subDays(6)->startOfDay();
+        $end   = Carbon::now()->endOfDay();
+
+        $period = CarbonPeriod::create($start, $end);
+
+        $violationsPerDay = collect($period)->map(function (Carbon $date) {
+            return [
+                'date'  => $date->format('M d, Y'),
+                'count' => ViolationRecord::whereDate('created_at', $date)->count(),
+            ];
+        });
+
+        $labels = $violationsPerDay->pluck('date')->toArray();
+        $data   = $violationsPerDay->pluck('count')->toArray();
+
+        $violationChart = Chartjs::build()
+            ->name('ViolationsLast7Days')
+            ->type('bar')
+            ->size(['width' => 400, 'height' => 250])
+            ->labels($labels)
+            ->datasets([
+                [
+                    'label' => 'Violations',
+                    'backgroundColor' => 'rgba(255, 215, 215, 0.4)',
+                    'borderColor' => 'rgba(128, 0, 0, 0.75)',
+                    'borderWidth' => 1,
+                    'data' => $data,
+                ],
+            ])
+            ->options([
+                'responsive' => true,
+
+                'animation' => [
+                    'duration' => 2000,
+                    'easing' => 'easeOutQuart',
+                ],
+
+                'scales' => [
+                    'y' => [
+                        'beginAtZero' => true,
+                        'grid' => [
+                            'color' => 'rgba(0,0,0,0.05)',
+                        ],
+                    ],
+                    'x' => [
+                        'grid' => [
+                            'display' => false,
+                        ],
+                    ],
+                ],
+
+                'plugins' => [
+                    'legend' => [
+                        'display' => false,
+                    ],
+                ],
+            ]);
+        return $violationChart;
     }
 }

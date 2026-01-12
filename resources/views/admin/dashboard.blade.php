@@ -174,16 +174,17 @@
 
         </div>
 
-        {{-- Right Column: Smaller Chart --}}
         <div class="col-lg-5">
             <div class="card shadow ">
                 <div class="card-header bg-primary text-white fw-bold">
-                    <i class="bi bi-bar-chart-fill me-1"></i> {{ $violationsChart->options['chart_title'] }}
+                    <i class="bi bi-bar-chart-fill me-1"></i>
+                    Violations This Week
                 </div>
-                <div class="card-body">
-                    {!! $violationsChart->renderHtml() !!}
-                    {!! $violationsChart->renderChartJsLibrary() !!}
-                    {!! $violationsChart->renderJs() !!}
+                <div class="card-body p-4">
+                    <div style="width:100%;">
+                        <x-chartjs-component :chart="$violationsChart" />
+                    </div>
+
                 </div>
             </div>
         </div>
