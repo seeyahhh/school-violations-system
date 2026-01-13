@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appeal;
-use Illuminate\Http\Request;
+use App\Models\Status;
 
 class AppealController extends Controller
 {
@@ -13,12 +13,12 @@ class AppealController extends Controller
     {
         // Fetch all appeals with relationships
         $appeals = Appeal::with([
-            'violationRecord.user', 
-            'violationRecord.violationSanction.violation', 
-            'violationRecord.violationSanction.sanction'
+            'violationRecord.user',
+            'violationRecord.violationSanction.violation',
+            'violationRecord.violationSanction.sanction',
         ])
-        ->orderBy('created_at', 'desc')
-        ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         // Calculate summary based on is_accepted column
         $summary = [
@@ -34,14 +34,20 @@ class AppealController extends Controller
     public function approve(Appeal $appeal)
     {
         // Check if appeal is already processed
-        if (!is_null($appeal->is_accepted)) {
+        if (! is_null($appeal->is_accepted)) {
             return redirect()->route('admin.appeals.index')
                 ->with('warning', 'This appeal has already been processed.');
         }
 
         // Update the appeal status to approved
         $appeal->update([
-            'is_accepted' => true
+            'is_accepted' => true,
+        ]);
+
+        $violationRecord = $appeal->violationRecord();
+
+        $violationRecord->update([
+            'status_id' => 3,
         ]);
 
         return redirect()->route('admin.appeals.index')
@@ -52,14 +58,20 @@ class AppealController extends Controller
     public function reject(Appeal $appeal)
     {
         // Check if appeal is already processed
-        if (!is_null($appeal->is_accepted)) {
+        if (! is_null($appeal->is_accepted)) {
             return redirect()->route('admin.appeals.index')
                 ->with('warning', 'This appeal has already been processed.');
         }
 
         // Update the appeal status to rejected
         $appeal->update([
-            'is_accepted' => false
+            'is_accepted' => false,
+        ]);
+
+        $violationRecord = $appeal->violationRecord();
+
+        $violationRecord->update([
+            'status_id' => 4,
         ]);
 
         return redirect()->route('admin.appeals.index')
