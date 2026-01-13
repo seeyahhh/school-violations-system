@@ -29,10 +29,10 @@
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="text-uppercase small mb-1">Pending</h6>
-                        <h3 class="fw-bold fs-1 mb-0 text-info">{{ $summary['pending'] }}</h3>
+                        <h3 class="fw-bold fs-1 mb-0 text-warning">{{ $summary['pending'] }}</h3>
                     </div>
-                    <span class="bg-blue-shade px-3 opacity-75 rounded-4">
-                        <i class="bi bi-check-circle-fill text-info fs-1 opacity-75"></i>
+                    <span class="bg-yellow-shade px-3 opacity-75 rounded-4">
+                        <i class="bi bi-clock fs-1 text-warning opacity-75"></i>
                     </span>
                 </div>
             </div>
@@ -44,10 +44,10 @@
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="text-uppercase small mb-1">Under Review</h6>
-                        <h3 class="fw-bold fs-1 mb-0 text-warning">{{ $summary['under_review'] }}</h3>
+                        <h3 class="fw-bold fs-1 mb-0 text-info">{{ $summary['under_review'] }}</h3>
                     </div>
-                    <span class="bg-yellow-shade px-3 opacity-75 rounded-4">
-                        <i class="bi bi-hourglass-split fs-1 text-warning opacity-75"></i>
+                    <span class="bg-blue-shade px-3 opacity-75 rounded-4">
+                        <i class="bi bi-file-earmark-text text-info fs-1 opacity-75 "></i>
                     </span>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                         <h3 class="fw-bold fs-1 mb-0 text-success">{{ $summary['resolved'] }}</h3>
                     </div>
                     <span class="bg-green-shade px-3 opacity-75 rounded-4">
-                        <i class="bi bi-check-circle-fill text-success fs-1 opacity-75"></i>
+                        <i class="bi bi-check-circle text-success fs-1 opacity-75"></i>
                     </span>
                 </div>
             </div>
