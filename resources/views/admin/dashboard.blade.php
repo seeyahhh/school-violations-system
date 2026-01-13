@@ -10,7 +10,7 @@
 
         {{-- Total Violations --}}
         <div class="col-md-3 col-6">
-            <div class="card shadow border-0 ">
+            <div class="card shadow border-0 w-100 h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="text-uppercase small mb-1">Total Violations</h6>
@@ -25,7 +25,7 @@
 
         {{-- Pending / In Progress --}}
         <div class="col-md-3 col-6">
-            <div class="card shadow border-0">
+            <div class="card shadow border-0 w-100 h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="text-uppercase small mb-1">Pending</h6>
@@ -40,7 +40,7 @@
 
         {{-- Under Review --}}
         <div class="col-md-3 col-6">
-            <div class="card shadow border-0">
+            <div class="card shadow border-0 w-100 h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="text-uppercase small mb-1">Under Review</h6>
@@ -55,7 +55,7 @@
 
         {{-- Resolved Cases --}}
         <div class="col-md-3 col-6">
-            <div class="card shadow border-0">
+            <div class="card shadow border-0 w-100 h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="text-uppercase small mb-1">Resolved Cases</h6>
