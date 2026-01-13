@@ -21,12 +21,8 @@
                             <span class="input-group-text bg-white border-end-0">
                                 <i class="bi bi-search"></i>
                             </span>
-                            <input type="text"
-                                class="form-control"
-                                name="search"
-                                id="searchInput"
-                                value="{{ request('search') }}"
-                                placeholder="Search by student name or ID...">
+                            <input type="text" class="form-control" name="search" id="searchInput"
+                                value="{{ request('search') }}" placeholder="Search by student name or ID...">
                             @if(request('search'))
                             <button type="button" class="btn btn-outline-secondary" id="clearSearch">
                                 <i class="bi bi-x"></i>
@@ -56,7 +52,7 @@
                     <thead class="table-light">
                         <tr class="text-nowrap">
                             <th>Case ID</th>
-                            <th class="text-center">Student ID</th>
+                            {{-- <th class="text-center">Student ID</th> --}}
                             <th class="">Student Name</th>
                             <th class="">Violation Type</th>
                             <th class="">Date</th>
@@ -71,11 +67,21 @@
                             <td class="text-nowrap fw-bold text-danger">
                                 V-{{ date('Y') }}-{{ $record->id }}
                             </td>
-                            <td class="fw-bold text-nowrap text-center">
+                            {{-- <td class="fw-bold text-nowrap text-center">
                                 {{ $record->user->school_id}}
-                            </td>
-                            <td class="text-nowrap fw-bold">
-                                {{ $record->user->first_name.' '.$record->user->last_name}}
+                            </td> --}}
+                            <td class="text-nowrap pe-3">
+                                <span
+                                    class="d-flex justify-content-between align-items-center gap-1 fs-5 fw-bold text-primary">
+                                    {{ $record->user->last_name}}
+                                    <span class="fs-6 text-secondary fw-light">
+                                       ({{ $record->user->school_id}})
+                                    </span>
+
+                                </span>
+                                <span class="d-block fs-6 text-muted">
+                                    {{ $record->user->first_name}}
+                                </span>
                             </td>
                             <td class="">
                                 {{ $record->violationSanction->violation->violation_name}}
