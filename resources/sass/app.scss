@@ -41,7 +41,7 @@ select:focus,
     height: 8px;
 }
 .table-responsive::-webkit-scrollbar-thumb {
-    background-color: $primary; 
+    background-color: $primary;
     border-radius: 4px;
 }
 .table-responsive::-webkit-scrollbar-track {
@@ -50,5 +50,48 @@ select:focus,
 
 .navbar-pup {
     background-color: #ffffff;
-    border-bottom: 6px solid #b22222; 
+    border-bottom: 6px solid #b22222;
+}
+
+// Sidebar Styles
+#sidebar {
+    width: 260px;
+
+    .nav {
+        a {
+            position: relative;
+            transition: all 0.3s ease;
+            border-radius: 50rem;
+            overflow: hidden;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+
+            i {
+                transition: transform 0.3s ease;
+            }
+
+            // Hover effect
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+
+                i {
+                    transform: scale(1.1);
+                }
+            }
+
+            // Active state
+            &.active {
+                background-color: rgba(255, 255, 255, 0.2);
+                font-weight: 700;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                border-left: 4px solid #ffca28;
+            }
+        }
+    }
+
+    .menu-label {
+        font-size: 0.7rem;
+    }
 }
