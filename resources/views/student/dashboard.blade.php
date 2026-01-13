@@ -190,8 +190,9 @@
                                                     APPEAL
                                                 </button>
                                                 @endif
-                                                
+                                                @if($record->appeal !== null)
                                                 <x-appeal-status-badge :record="$record" />
+                                                @endif
                                             </td>
                                         </tr>
                                         <x-modals.request-appeal :violation="$record"
