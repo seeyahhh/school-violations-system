@@ -4,7 +4,7 @@
     <!-- Header -->
     <div class="offcanvas-header d-flex justify-content-between align-items-start">
         <div>
-            <h5 class="fw-bold mb-0">PUP GABAY</h5>
+            <h5 class="fw-bold mb-0">Iskorections</h5>
             <small class="text-white-50">Violations & Sanctions</small>
         </div>
         <button type="button" class="border-0 bg-primary" data-bs-dismiss="offcanvas">

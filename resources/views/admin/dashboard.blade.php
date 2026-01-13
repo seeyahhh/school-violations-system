@@ -17,7 +17,7 @@
                         <h3 class="fw-bold fs-1 mb-0 text-primary">{{ $summary['total_violations'] }}</h3>
                     </div>
                     <span class="bg-red-shade px-3 opacity-75 rounded-4">
-                        <i class="bi bi-exclamation-circle text-primary fs-1 p-0" style=""></i>
+                        <i class="bi bi-exclamation-circle text-primary fs-1 p-0"></i>
                     </span>
                 </div>
             </div>
