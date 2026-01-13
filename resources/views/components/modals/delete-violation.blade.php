@@ -7,7 +7,7 @@
             <div class="modal-body text-center px-4">
                 <h5 class="fw-bold mb-2" id="{{ $id }}Label">Confirm Delete</h5>
                 <p class="text-muted mb-0"> This action <strong>cannot be undone</strong>. Are you sure you want to
-                    delete record <span class="text-primary fw-bold"> V-{{ date('Y') }}-{{ $record->id }}</span>? </p>
+                    delete record <span class="text-primary fw-bold">{{ $record->formatCaseId() }}</span>? </p>
                 <input type="hidden" id="delete_id_storage">
             </div>
             <form action="{{ route('admin.violations-management.destroy', $record)}}" method="POST"> @csrf @method('DELETE')

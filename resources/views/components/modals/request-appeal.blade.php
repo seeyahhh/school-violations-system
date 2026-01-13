@@ -13,17 +13,17 @@
                     <div class="d-flex flex-column mb-3  align-items-start">
                         <div class="d-flex p-2 flex-column align-items-start rounded-2 relative bg-dark-tertiary w-100">
                             <small class="text-muted">Case ID:</small>
-                            <p class="fw-bold fs-4 mb-0 text-primary">V-{{ $violation->id }}</p>
+                            <p class="fw-bold fs-4 mb-0 text-primary">{{ $violation->formatCaseId() }}</p>
                         </div>
 
                         <div class="row w-100 mt-3">
-                            <div class="col-12 col-md-6 d-flex flex-column align-items-start">
+                            <div class="col-12 col-md-8 d-flex flex-column align-items-start">
 
                                 <small class="text-muted">Violation:</small>
                                 <p class="fw-bold text-start">{{
                                     $violation->violationSanction->violation->violation_name }}</p>
                             </div>
-                            <div class="col-12 col-md-6 d-flex flex-column align-items-start align-items-md-end">
+                            <div class="col-12 col-md-4 d-flex flex-column align-items-start align-items-md-end">
 
                                 <small class="text-muted">Offense Level:</small>
                                 <p>

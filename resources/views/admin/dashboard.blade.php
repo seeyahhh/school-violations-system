@@ -96,19 +96,19 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover  mb-0 align-middle ">
+                        <table class="table table-hover  mb-0 align-middle">
                             <thead class="table-light">
                                 <tr>
                                     <th>Case ID</th>
                                     <th>Student</th>
-                                    <th>Violation</th>
+                                    <th class="col-xl-6">Violation</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($recentViolations as $record)
                                 <tr>
-                                    <td class="text-danger fw-bold">V-{{ date('Y') }}-{{ $record->id }}</td>
+                                    <td class="text-danger fw-bold text-nowrap">{{ $record->formatCaseId() }}</td>
                                     <td class="text-truncate" style="max-width: 120px;">
                                         {{ $record->user->first_name.' '.$record->user->last_name }}
                                     </td>
@@ -150,7 +150,7 @@
                                 @forelse ($recentAppeals as $appeal)
                                 <tr>
                                     <td>A-{{ $appeal->id }}</td>
-                                    <td>V-{{ date('Y') }}-{{ $appeal->violationRecord->id }}</td>
+                                    <td>{{ $appeal->violationRecord->formatCaseId() }}</td>
                                     <td class="text-truncate" style="max-width: 140px;">
                                         {{ $appeal->violationRecord->user->first_name.'
                                         '.$appeal->violationRecord->user->last_name }}

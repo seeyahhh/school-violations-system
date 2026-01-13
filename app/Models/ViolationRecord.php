@@ -25,11 +25,16 @@ class ViolationRecord extends Model
             return false;
         }
 
-        if (!($this->status->status_name === 'Under review')) {
+        if (! ($this->status->status_name === 'Under review')) {
             return false;
         }
 
         return $this->created_at->diffInDays(now()) < 3;
+    }
+
+    public function formatCaseId()
+    {
+        return 'V-'.now()->year.'-'.$this->id;
     }
 
     public function user()

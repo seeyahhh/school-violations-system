@@ -17,7 +17,7 @@
 
             {{-- Case ID --}}
             <h5 class="fw-bold text-danger mb-2">
-                V-{{ date('Y') }}-{{ str_pad($appeal->violationRecord->id, 3, '0', STR_PAD_LEFT) }}
+                {{ $appeal->violationRecord->formatCaseId() }}
             </h5>
 
             {{-- Student Name --}}
@@ -42,7 +42,7 @@
             </p>
 
             {{-- Appeal Section --}}
-            <div class="mb-3 flex-grow-1">
+            <div class="mb-3 grow">
                 <p class="fw-semibold mb-1 small">Appeal</p>
                 <p class="text-muted small" style="font-size: 0.85rem;">
                     {{ Str::limit($appeal->appeal_content, 100) }}

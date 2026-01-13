@@ -65,7 +65,7 @@
                         @forelse($violationRecords as $record)
                         <tr data-bs-toggle="modal" data-bs-target="#viewViolationModal-{{ $record->id }}" role="button">
                             <td class="text-nowrap fw-bold text-danger">
-                                V-{{ date('Y') }}-{{ $record->id }}
+                               {{ $record->formatCaseId() }}
                             </td>
                             {{-- <td class="fw-bold text-nowrap text-center">
                                 {{ $record->user->school_id}}

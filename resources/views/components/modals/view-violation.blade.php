@@ -14,7 +14,7 @@
                             CASE ID
                         </small>
                         <div class="text-danger fw-bold fs-5" id="view_case_id">
-                            V-{{ date('Y') }}-{{ $record->id }}
+                           {{ $record->formatCaseId() }}
                         </div>
                     </div>
                     <div class="col-md-6">

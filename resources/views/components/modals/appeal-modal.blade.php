@@ -3,7 +3,6 @@
 @php
     $statusText = is_null($appeal->is_accepted) ? 'PENDING' : ($appeal->is_accepted ? 'APPROVED' : 'REJECTED');
     $badgeClass = is_null($appeal->is_accepted) ? 'warning' : ($appeal->is_accepted ? 'success' : 'danger');
-    $caseId = 'V-' . date('Y') . '-' . str_pad($appeal->violationRecord->id, 3, '0', STR_PAD_LEFT);
 @endphp
 
 <div class="modal fade" id="appealModal{{ $appeal->id }}" tabindex="-1" aria-labelledby="appealModalLabel{{ $appeal->id }}" aria-hidden="true">
@@ -23,7 +22,7 @@
                     {{-- Case ID & Status --}}
                     <div class="col-md-6">
                         <label class="text-muted text-uppercase small fw-semibold mb-1">Case ID</label>
-                        <p class="fw-bold text-danger mb-0">{{ $caseId }}</p>
+                        <p class="fw-bold text-danger mb-0">{{ $appeal->violationRecord->formatCaseId() }}</p>
                     </div>
                     <div class="col-md-6">
                         <label class="text-muted text-uppercase small fw-semibold mb-1">Status</label>
