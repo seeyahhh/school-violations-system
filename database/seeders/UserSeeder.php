@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -22,7 +21,7 @@ class UserSeeder extends Seeder
             'school_id'  => '2026-00001-MN-0',
             'email'      => 'admin@pup.edu.ph',
             'password'   => Hash::make('secret'),
-            'role_id'    => DB::table('roles')->where('role_name', 'Faculty')->value('id'),
+            'role_id'    => 2,
         ]);
 
         // Default Student User
@@ -32,9 +31,11 @@ class UserSeeder extends Seeder
             'school_id'  => '2026-00002-MN-0',
             'email'      => 'student@iskolarngbayan.pup.edu.ph',
             'password'   => Hash::make('secret'),
-            'role_id'    => DB::table('roles')->where('role_name', 'Student')->value('id'),
+            'role_id'    => 1,
         ]);
 
-        User::factory()->count(20)->create();
+        User::factory()->student()->count(10)->create();
+
+        User::factory()->faculty()->count(5)->create();
     }
 }
