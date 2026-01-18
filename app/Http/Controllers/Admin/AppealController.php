@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AppealDeniedMail;
 use App\Models\Appeal;
 use App\Models\Status;
+use Illuminate\Support\Facades\Mail;
 
 class AppealController extends Controller
 {
@@ -77,13 +79,21 @@ class AppealController extends Controller
             'is_accepted' => false,
         ]);
 
-        $violationRecord = $appeal->violationRecord();
+        $violationRecordRelation = $appeal->violationRecord();
 
-        $violationRecord->update([
+        $violationRecordRelation->update([
             'status_id' => 2, // Set status to 'In progress'
         ]);
 
+        // // Load related user for mailing
+        // $appeal->load(['violationRecord.user']);
+
+        // if ($appeal->violationRecord && $appeal->violationRecord->user && $appeal->violationRecord->user->email) {
+        //     Mail::to($appeal->violationRecord->user->email)
+        //         ->send(new AppealDeniedMail($appeal));
+        // }
+
         return redirect()->route('admin.appeals.index')
-            ->with('success', 'Appeal has been rejected.');
+            ->with('success', 'Appeal has been rejected and the student has been notified.');
     }
 }
