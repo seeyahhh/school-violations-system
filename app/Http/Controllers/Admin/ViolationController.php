@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ViolationRecordedMail;
 use App\Models\Status;
 use App\Models\User;
 use App\Models\Violation;
@@ -10,6 +11,7 @@ use App\Models\ViolationRecord;
 use App\Models\ViolationSanction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ViolationController extends Controller
 {
@@ -86,6 +88,14 @@ class ViolationController extends Controller
         if ($result == 0) {
             return 'Error:  Action failed.';
         }
+
+        $violationRecord = ViolationRecord::with(['status', 'user', 'violationSanction.violation', 'violationSanction.sanction', 'appeal'])
+            ->where('user_id', $user_id)
+            ->latest()
+            ->first();
+
+        Mail::to($violationRecord->user->email)
+            ->send(new ViolationRecordedMail($violationRecord));
 
         return redirect()->route('admin.violations-management.index');
     }

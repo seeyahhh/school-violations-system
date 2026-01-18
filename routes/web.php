@@ -1,14 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\AppealController as AdminAppealController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\SanctionController;
 use App\Http\Controllers\Admin\ViolationController;
-use App\Http\Controllers\Admin\ViolationsManagementController as AdminViolationsManagementController;
-use App\Http\Controllers\Admin\AppealController as AdminAppealController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Student\AppealController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\ViolationOverviewController;
+use App\Mail\ViolationRecordedMail;
+use App\Models\ViolationRecord;
 use Illuminate\Support\Facades\Route;
 
 // Default Route
@@ -26,7 +27,6 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
-
 // Authenticated Routes
 Route::group(['middleware' => 'auth'], function () {
 
@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Dashboard Page
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
 
-        //Sanction Page
+        // Sanction Page
         Route::get('/sanction', [SanctionController::class, 'index'])->name('sanction');
 
         // Appeals Management Page
@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/appeals/{appeal}/approve', [AdminAppealController::class, 'approve'])->name('appeals.approve');
         Route::post('/appeals/{appeal}/reject', [AdminAppealController::class, 'reject'])->name('appeals.reject');
 
-        //Violation Resource
+        // Violation Resource
         Route::resource('/violations-management', ViolationController::class);
     });
 
@@ -61,8 +61,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/appeal', [AppealController::class, 'store'])->name('appeal.store');
     });
 
-
-
-    //Logout user
+    // Logout user
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/test-email/{id}', function ($id) {
+        $record = ViolationRecord::findOrFail($id);
+
+        return new ViolationRecordedMail($record);
+    })->middleware('auth');
 });
