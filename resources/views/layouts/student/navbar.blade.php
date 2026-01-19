@@ -6,7 +6,7 @@
                 <i class="bi bi-list text-primary fs-3"></i>
             </button>
 
-            <a href="{{ route('admin.dashboard.index') }}" class="text-decoration-none d-block">
+            <a href="{{ route('student.dashboard.index') }}" class="text-decoration-none d-block">
                 <h5 class="mb-0 fw-bold" style="color: #800000;">IsKorrections</h5>
 
                 <small class="text-muted">
