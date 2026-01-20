@@ -12,7 +12,7 @@
 <body class="d-flex flex-column min-vh-100">
     <div class="container-fluid">
         <div class="row vh-100">
-            <div class="col-lg-6 col-12 bg-white d-flex align-items-center justify-content-center">
+            <div class="col-lg-7 col-12 bg-white d-flex align-items-center justify-content-center">
                 <div class="row justify-content-center">
                     <div class="col-xl-9 col-md-10 col-11 mb-3 mb-sm-0">
                         <div class="">
@@ -20,6 +20,7 @@
                                 style="border: 1px solid #f0b2b2; border-radius: 48px; background-color: white;">
                                 <div class="card-body p-5 text-center">
 
+                                    <!-- Card Heading -->
                                     <div class="d-flex justify-content-center mb-4">
                                         <div
                                             style="background-color: #b22222; width: 80px; height: 80px; border-radius: 18px; display: flex; align-items: center; justify-content: center;">
@@ -41,6 +42,8 @@
                                         </div>
                                         @endforeach
                                         @endif
+
+                                        <!-- Email Address -->
                                         <div class="mb-3 text-start">
                                             <label class="form-label ms-1" style="font-weight: 500;">Email
                                                 Address</label>
@@ -55,6 +58,7 @@
                                             </div>
                                         </div>
 
+                                        <!-- Password -->
                                         <div class="mb-4 text-start">
                                             <label class="form-label ms-1" style="font-weight: 500;">Password</label>
                                             <div class="input-group shadow-sm"
@@ -72,6 +76,7 @@
                                             </div>
                                         </div>
 
+                                        <!-- Sign In Button -->
                                         <div class="d-grid mb-4">
                                             <button type="submit" class="btn text-white fw-bold py-2 shadow-sm"
                                                 style="background-color: #b22222; border-radius: 12px; font-size: 18px;">
@@ -95,20 +100,35 @@
                 </div>
             </div>
 
-            <div class="d-none col-12 col-lg-6 d-none d-lg-flex flex-column align-items-center justify-content-center text-white text-center"
-                style="background-color: #8B0000; padding: 20px;">
-                <img src="/PUPLogo 1 Login.png" alt="PUP Logo" class="img-fluid mb-4"
-                    style="max-width: 40%; height: auto; filter: drop-shadow(0px 0px 10px rgba(255,255,255,0.3));">
-                <h1 class="fw-bold mb-5"
-                    style="font-size: 60px; letter-spacing: 2px; text-shadow: 4px 4px 0px rgba(0,0,0,0.4);">
-                    SCHOOL VIOLATIONS <br> SYSTEM
-                </h1>
-                <h2 class="fw-bold mb-2" style="font-size: 45px;">Hello, Welcome back!</h2>
-                <div class="mt-2">
-                    <p class="mb-0" style="font-size: 18px; font-weight: 500;">To keep connected with us please
-                        login<br>with your personal informations</p>
+            <div class="col-12 col-lg-5 d-none d-lg-flex flex-column align-items-center text-white text-center position-relative"
+                style="padding: 40px; overflow: hidden;">
+
+                <!-- Background -->
+                <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('/PUP_pic_2.jpg') center/cover; opacity: 0.6; z-index: 1;"></div>
+                <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(139, 0, 0, 0.55); z-index: 2;"></div>
+
+                <div class="position-relative d-flex flex-column justify-content-center flex-grow-1" style="z-index: 3;">
+                    <!-- Logo -->
+                    <div class="mb-4">
+                        <img src="{{ asset('IsKorrections.png') }}" alt="IsKorrections Logo" class="img-fluid" style="width: 320px; filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.4));">
+                    </div>
+
+                    <!-- Title -->
+                    <h1 class="fw-bold mb-3 display-2 lh-1" style="letter-spacing: 1px; text-shadow: 3px 3px 6px #361717;">
+                        IsKorrections
+                    </h1>
+
+                    <h2 class="fw-semibold mb-5 h4" style="text-shadow: 2px 2px 4px #361717;">
+                        Student Conduct & Discipline<br>Management System
+                    </h2>
                 </div>
 
+                <!-- Tagline -->
+                <div class="position-relative mb-4" style="z-index: 3;">
+                    <p class="fw-bold fst-italic fs-5 mb-0" style="text-shadow: 2px 2px 4px #361717;">
+                        "Mula Sa 'Yo, Para Bayan"
+                    </p>
+                </div>
             </div>
         </div>
     </div>
