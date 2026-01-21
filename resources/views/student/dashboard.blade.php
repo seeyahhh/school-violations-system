@@ -80,12 +80,10 @@
                             </thead>
                             <tbody>
                                 @forelse ($violationRecords as $record)
-                                <tr>
+                                <tr role="button"
+                                    onclick="window.location='{{ route('student.violation.show', $record) }}'">
                                     <td class="ps-4 text-danger text-center fw-bold small text-nowrap">
-                                        <a href="{{ route('student.violation.show', $record) }}"
-                                            class="text-decoration-none text-danger">
-                                            {{ $record->formatCaseId() }}
-                                        </a>
+                                        {{ $record->formatCaseId() }}
                                     </td>
 
                                     <td class="small text-wrap ">
@@ -112,13 +110,13 @@
                                         @if ($record->canBeAppealed())
                                         <button class="btn btn-sm btn-danger px-3 rounded-2 fw-bold"
                                             style="font-size: 11px;" data-bs-toggle="modal"
-                                            data-bs-target="#appealModal-{{ $record->id }}">
+                                            data-bs-target="#appealModal-{{ $record->id }}" onclick="event.stopPropagation();">
                                             APPEAL
                                         </button>
                                         @endif
 
                                         @if($record->appeal !== null)
-                                        <x-appeal-status-badge :record="$record" />
+                                        <x-appeal-status-badge :record=" $record" />
                                         @endif
                                     </td>
                                 </tr>
