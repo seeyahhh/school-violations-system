@@ -93,10 +93,9 @@ class ViolationController extends Controller
         }
         // Send Email notification
         // $this->sendViolationEmail($record, new ViolationRecordedMail($record));
-
-        // Redirects page to admin.violations-management.index with response = 1 in session data.
-        // This is what enable response-modal blade file to render
-        return redirect()->route('admin.violations-management.index')->with('response', 1);
+        
+        session()->flash('response', 'Violation record created.');
+        return redirect()->route('admin.violations-management.index');
     }
 
     private function getUserId($student_id)
@@ -167,7 +166,8 @@ class ViolationController extends Controller
 
         // If the current record's violation_id and newly-entered violation_id are the same, do nothing.
         if (strcmp($violation_id, $prev_violation_id) == 0) {
-            return redirect()->route('admin.violations-management.index')->with('response', 1);
+            session()->flash('response', 'Violation record updated.');
+            return redirect()->route('admin.violations-management.index');
         }
 
         // If the current record's violation_id and newly-entered violation_id are different
@@ -184,7 +184,9 @@ class ViolationController extends Controller
             return 'Error: Action failed';
         }
 
-        return redirect()->route('admin.violations-management.index')->with('response', 1);
+       session()->flash('response', 'Violation record updated.');
+
+        return redirect()->route('admin.violations-management.index');
     }
 
     /**
@@ -194,7 +196,9 @@ class ViolationController extends Controller
     {
         $result = $violations_management->delete();
 
-        return redirect()->route('admin.violations-management.index')->with('response', 1);
+        session()->flash('response', 'Violation record deleted.');   
+
+        return redirect()->route('admin.violations-management.index');
     }
 
     /**
@@ -207,6 +211,7 @@ class ViolationController extends Controller
             'status_id' => 3,
         ]);
 
+        session()->flash('response', 'Violation record resolved.');    
         return redirect()->route('admin.violations-management.index');
     }
 
