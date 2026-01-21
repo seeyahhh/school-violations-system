@@ -26,6 +26,7 @@ class Appeal extends Model
 
     public function violationRecord()
     {
-        return $this->belongsTo(ViolationRecord::class);
+        // Allows an appeal to point to a soft-deleted record
+        return $this->belongsTo(ViolationRecord::class)->withTrashed();
     }
 }
