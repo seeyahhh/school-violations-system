@@ -16,9 +16,8 @@ class DashboardController extends Controller
         $violationRecords = $user->violationRecords()
             ->with(['status', 'violationSanction.violation', 'violationSanction.sanction', 'appeal'])
             ->withTrashed() // Lets students see soft-deleted records
-            ->latest()
-            ->get();
-
+            ->latest();
+            
         $violationCount = $violationRecords->count();
 
         $statuses = Status::all();
@@ -28,6 +27,9 @@ class DashboardController extends Controller
         if ($statusId && $statusId !== 'all') {
             $violationRecords = $violationRecords->where('status_id', $statusId);
         }
+
+        $violationRecords = $violationRecords->latest()->paginate(10);
+
         // return response()->json($violationRecords);
         // compact data to frontend
         return view('student.dashboard', compact('user', 'violationCount', 'violationRecords', 'statuses'));

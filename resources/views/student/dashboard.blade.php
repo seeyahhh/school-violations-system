@@ -141,7 +141,7 @@
                             </small>
                         </div>
                         <div class="col-12 col-sm-auto ms-auto d-flex justify-content-center justify-content-sm-end">
-                            {{-- {{ $violationRecords->links() }} --}}
+                            {{ $violationRecords->links() }}
                         </div>
                     </div>
                 </div>

@@ -100,7 +100,7 @@
                             <td class="text-center text-nowrap" onclick="event.stopPropagation()">
                                 <div class="btn-group justify-content-end d-flex" role="group"
                                     aria-label="Violation actions">
-                                    
+
                                     {{-- Resolve --}}
                                     @if ($record->status_id === 2)
                                     <button type="button" class="btn btn-sm btn-outline-primary action-resolve-btn"
@@ -150,10 +150,19 @@
                 </div>
             </div>
 
-            {{-- Pagination Links --}}
-            <div class="d-flex flex-column justify-content-end align-items-end mx-3">
-                <small class="text-muted" id="rowCounter">Showing {{ $violationRecordCount }} violations</small>
-                <span class="">{{ $violationRecords->links() }}</span>
+        </div>
+        
+        {{-- Pagination Links --}}
+        <div class="card-footer bg-white border-0 py-3">
+            <div class="row align-items-center">
+                <div class="col-12 col-sm-auto mb-2 mb-sm-0 text-center text-sm-start">
+                    <small class="text-muted">
+                        Showing {{ $violationRecords->count() }} of {{ $violationCount }} violations
+                    </small>
+                </div>
+                <div class="col-12 col-sm-auto ms-auto d-flex justify-content-center justify-content-sm-end">
+                    {{ $violationRecords->links() }}
+                </div>
             </div>
         </div>
     </div>
@@ -175,15 +184,16 @@
 
 {{-- Action Toast --}}
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="actionToast" class="toast autohide" role="alert" aria-live="assertive" aria-atomic="true" data-response="{{ session('response') }}">
-    <div class="toast-header text-bg-success">
-      <strong class="me-auto">System Message</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    <div id="actionToast" class="toast autohide" role="alert" aria-live="assertive" aria-atomic="true"
+        data-response="{{ session('response') }}">
+        <div class="toast-header text-bg-success">
+            <strong class="me-auto">System Message</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ session('response') }}
+        </div>
     </div>
-    <div class="toast-body">
-      {{ session('response') }}
-    </div>
-  </div>
-</div>  
+</div>
 
 @endsection

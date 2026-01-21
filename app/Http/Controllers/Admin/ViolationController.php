@@ -49,7 +49,7 @@ class ViolationController extends Controller
         }
 
         // Summary Cards
-        $violationRecordCount = $violationRecords->count();
+        $violationCount = $violationRecords->count();
         $under_reviewCount = ViolationRecord::where('status_id', 1)->count();
         $pendingCount = ViolationRecord::where('status_id', 2)->count();
         $resolvedCount = ViolationRecord::where('status_id', 3)->count();
@@ -62,7 +62,7 @@ class ViolationController extends Controller
             compact(
                 'violations',
                 'violationRecords',
-                'violationRecordCount',
+                'violationCount',
                 'under_reviewCount',
                 'pendingCount',
                 'resolvedCount',
