@@ -34,7 +34,7 @@
                         <label class="fw-bold">
                             Notes
                         </label>
-                        <textarea class="form-control" name="description" rows="5"></textarea>
+                        <textarea type="text" class="form-control" name="description" rows="5"></textarea>
                     </div>
                     <div class="d-flex justify-content-end gap-2 mt-4">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">

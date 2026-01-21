@@ -73,6 +73,7 @@ class ViolationController extends Controller
 
         $student_id = request('student_id');
         $violation_id = request('violation_id');
+        $notes = request('description');
 
         if ($student_id == null) {
             return 'Error:  Missing values (student_id or violation_id)';
@@ -85,6 +86,7 @@ class ViolationController extends Controller
         $record = ViolationRecord::create([
             'user_id' => $user_id,
             'vio_sanct_id' => $vio_sanct_id,
+            'notes'=> $notes,
             'status_id' => 1,
         ]);
 

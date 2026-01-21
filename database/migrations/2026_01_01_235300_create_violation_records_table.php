@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('vio_sanct_id')->constrained('violation_sanctions')->onDelete('cascade');
             $table->foreignId('status_id')->constrained('status')->onDelete('cascade');
+            $table->text('notes')->nullable(true);
             $table->timestamps();
             $table->softDeletes();
         });

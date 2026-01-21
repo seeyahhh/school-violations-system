@@ -79,7 +79,7 @@
                             DESCRIPTION
                         </small>
                         <div class="p-3 bg-light rounded border text-muted" id="view_description">
-                            ...
+                            {{ $record->notes }}
                         </div>
                     </div>
                 </div>
