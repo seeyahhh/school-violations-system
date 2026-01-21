@@ -25,6 +25,7 @@ class AppealController extends Controller
             'violation_record_id' => $request->violation_record_id
         ]);
 
-        return redirect()->back()->with('success', 'Appeal submitted successfully.');
+        session()->flash('response', 'Appeal submitted successfully.');
+        return redirect()->back();  
     }
 }

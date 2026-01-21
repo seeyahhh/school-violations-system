@@ -47,8 +47,8 @@ class AppealController extends Controller
     {
         // Check if appeal is already processed
         if (! is_null($appeal->is_accepted)) {
-            return redirect()->route('admin.appeals.index')
-                ->with('warning', 'This appeal has already been processed.');
+            session()->flash('response', 'This appeal has already been processed.');
+            return redirect()->route('admin.appeals.index');
         }
 
         // Update the appeal status to approved
@@ -65,8 +65,9 @@ class AppealController extends Controller
         // Send email notification
         // $this->sendAppealMail($appeal, new AppealAcceptedMail($appeal));
 
-        return redirect()->route('admin.appeals.index')
-            ->with('success', 'Appeal has been approved successfully.');
+        session()->flash('response', 'Appeal has been accepted, and the student has been notified.');
+
+        return redirect()->route('admin.appeals.index');
     }
 
     /* Reject an appeal */
@@ -74,8 +75,8 @@ class AppealController extends Controller
     {
         // Check if appeal is already processed
         if (! is_null($appeal->is_accepted)) {
-            return redirect()->route('admin.appeals.index')
-                ->with('warning', 'This appeal has already been processed.');
+            session()->flash('response', 'This appeal has already been processed');
+            return redirect()->route('admin.appeals.index');
         }
 
         // Update the appeal status to rejected
@@ -92,8 +93,8 @@ class AppealController extends Controller
         // Send email notification
         // $this->sendAppealMail($appeal, new AppealDeniedMail($appeal));
 
-        return redirect()->route('admin.appeals.index')
-            ->with('success', 'Appeal has been rejected and the student has been notified.');
+        session()->flash('response', 'Appeal has been rejected, and the student has been notified.');
+        return redirect()->route('admin.appeals.index');
     }
 
     /**

@@ -1,6 +1,7 @@
 import "./bootstrap";
 import "./appeal-search";
 import "./violations-search";
+import "./action-toast";
 
 /* Password eye button */
 document.addEventListener("DOMContentLoaded", () => {
