@@ -72,13 +72,12 @@ class AppealController extends Controller
             'status_id' => 4, // Set status to 'Dismissed'
         ]);
 
-        // $violationRecord -> delete();
-
         // Send email notification
-        // $this->sendAppealMail($appeal, new AppealAcceptedMail($appeal));
+        $this->sendAppealMail($appeal, new AppealAcceptedMail($appeal));
 
-        $this->utilitiesService->updateViolations($appeal->violation_record_id);
-        
+        $record = ViolationRecord::findOrFail($appeal->violation_record_id);
+        $this->utilitiesService->updateViolations($record);
+
         session()->flash('response', 'Appeal has been accepted, and the student has been notified.');
         return redirect()->route('admin.appeals.index');
     }
@@ -104,7 +103,7 @@ class AppealController extends Controller
         ]);
 
         // Send email notification
-        // $this->sendAppealMail($appeal, new AppealDeniedMail($appeal));
+        $this->sendAppealMail($appeal, new AppealDeniedMail($appeal));
 
         session()->flash('response', 'Appeal has been rejected, and the student has been notified.');
         return redirect()->route('admin.appeals.index');

@@ -10,7 +10,7 @@ class UtilitiesService
 {
 
     /**
-     * After an update to a student's records (UPDATE/DELETE), update their records to the correct number of offense.
+     * After an update to a student's records UPDATE/DELETE, update their records to the correct number of offense.
      */
     public function updateViolations($record)
     {

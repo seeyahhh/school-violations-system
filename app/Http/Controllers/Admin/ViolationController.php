@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ViolationRequest;
+use App\Mail\ViolationRecordedMail;
+use App\Mail\ViolationResolvedMail;
 use App\Models\Status;
 use App\Models\User;
 use App\Models\Violation;
@@ -100,7 +102,7 @@ class ViolationController extends Controller
         ]);
 
         // Send Email notification
-        // $this->violationService->sendViolationEmail($record, new ViolationRecordedMail($record));
+        $this->utilitiesService->sendViolationEmail($record, new ViolationRecordedMail($record));
 
         session()->flash('response', 'Violation record created.');
         return redirect()->route('admin.violations-management.index');
@@ -132,6 +134,7 @@ class ViolationController extends Controller
         // If the current record's violation_id and newly-entered violation_id are different
         $violation_count = $this->utilitiesService->countViolationOfStudent($user_id, $violation_id);
         $vio_sanct_id = $this->utilitiesService->determineViolationSanction($violation_id, $violation_count);
+
         $this->utilitiesService->updateViolations($violations_management);
 
         $violations_management->update([
@@ -168,6 +171,8 @@ class ViolationController extends Controller
         $violations_management->update([
             'status_id' => 3,
         ]);
+
+        $this->utilitiesService->sendViolationEmail($violations_management, new ViolationResolvedMail($violations_management));
 
         session()->flash('response', 'Violation record resolved.');
 
