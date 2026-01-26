@@ -107,12 +107,6 @@ php artisan serve
 ## Default Credentials
 
 After seeding the database, you can log in with these default credentials:
-Student: 
-- Email: `student@iskolarngbayan.pup.edu.ph`
-- Password: `secret`
-
-Admin: 
-- Email: `admin@pup.edu.ph`
 - Password: `secret`
 
 ---
