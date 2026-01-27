@@ -30,12 +30,19 @@ class ViolationRecord extends Model
             return false;
         }
 
-        return $this->created_at->diffInDays(now()) < 3;
+        $canAppeal = $this->created_at->diffInDays(now()) < 3;
+
+        // Update the Violation Record to In progress if there is no appeal after 3days
+        if (!$canAppeal && $this->status_id === 1) {
+            $this->update(['status_id' => 2]);
+        }
+
+        return $canAppeal;
     }
 
     public function formatCaseId()
     {
-        return 'V-'.now()->year.'-'.$this->id;
+        return 'V-' . now()->year . '-' . $this->id;
     }
 
     public function user()
