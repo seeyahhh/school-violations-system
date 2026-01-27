@@ -110,13 +110,14 @@
                                         @if ($record->canBeAppealed())
                                         <button class="btn btn-sm btn-danger px-3 rounded-2 fw-bold"
                                             style="font-size: 11px;" data-bs-toggle="modal"
-                                            data-bs-target="#appealModal-{{ $record->id }}" onclick="event.stopPropagation();">
+                                            data-bs-target="#appealModal-{{ $record->id }}"
+                                            onclick="event.stopPropagation();">
                                             APPEAL
                                         </button>
                                         @endif
 
-                                        @if($record->appeal !== null)
-                                        <x-appeal-status-badge :record=" $record" />
+                                        @if($record->appeal !== null && !$record->canBeAppealed())
+                                        <x-appeal-status-badge :appeal="$record->appeal" />
                                         @endif
                                     </td>
                                 </tr>

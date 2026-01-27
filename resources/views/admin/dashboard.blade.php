@@ -141,9 +141,9 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="col-2 text-center"> Appeal ID</th>
-                                    <th class="col-3 text-center">Case ID</th>
+                                    <th class="col-3 ">Case ID</th>
                                     <th>Student</th>
-                                    <th>Status</th>
+                                    <th class="text-center">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -155,10 +155,8 @@
                                         {{ $appeal->violationRecord->user->first_name.'
                                         '.$appeal->violationRecord->user->last_name }}
                                     </td>
-                                    <td>
-                                        <span class="badge bg-{{ $appeal->is_accepted ? 'success' : 'warning' }}">
-                                            {{ $appeal->is_accepted ? 'Resolved' : 'Pending' }}
-                                        </span>
+                                    <td class="">
+                                        <x-appeal-status-badge :appeal="$appeal" />
                                     </td>
                                 </tr>
                                 @empty

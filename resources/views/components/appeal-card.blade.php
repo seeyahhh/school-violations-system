@@ -1,8 +1,8 @@
 @props(['appeal'])
 
 @php
-    $statusText = is_null($appeal->is_accepted) ? 'PENDING' : ($appeal->is_accepted ? 'APPROVED' : 'REJECTED');
-    $badgeClass = is_null($appeal->is_accepted) ? 'warning' : ($appeal->is_accepted ? 'success' : 'danger');
+$statusText = is_null($appeal->is_accepted) ? 'PENDING' : ($appeal->is_accepted ? 'APPROVED' : 'REJECTED');
+$badgeClass = is_null($appeal->is_accepted) ? 'warning' : ($appeal->is_accepted ? 'success' : 'danger');
 @endphp
 
 <div class="col-lg-3 col-md-4 col-sm-6 col-12">
@@ -10,9 +10,7 @@
         <div class="card-body d-flex flex-column position-relative">
             {{-- Status Badge in Top Right --}}
             <div class="position-absolute top-0 end-0 m-2">
-                <span class="badge bg-{{ $badgeClass }} rounded-pill px-3 py-1 small">
-                    {{ $statusText }}
-                </span>
+                <x-appeal-status-badge :appeal="$appeal" />
             </div>
 
             {{-- Case ID --}}
@@ -22,7 +20,7 @@
 
             {{-- Student Name --}}
             <h6 class="mb-1">
-                {{ $appeal->violationRecord->user->first_name }} 
+                {{ $appeal->violationRecord->user->first_name }}
                 {{ $appeal->violationRecord->user->last_name }}
             </h6>
 
@@ -51,8 +49,7 @@
 
             {{-- View Button --}}
             <div class="mt-auto">
-                <button class="btn btn-primary text-white w-100 "
-                    data-bs-toggle="modal"
+                <button class="btn btn-primary text-white w-100 " data-bs-toggle="modal"
                     data-bs-target="#appealModal{{ $appeal->id }}">
                     View
                 </button>

@@ -8,13 +8,13 @@ use Illuminate\View\Component;
 
 class AppealStatusBadge extends Component
 {
-    public $record;
+    public $appeal;
     /**
      * Create a new component instance.
      */
-    public function __construct($record)
+    public function __construct($appeal)
     {
-        $this->record = $record;
+        $this->appeal = $appeal;
     }
 
     /**
