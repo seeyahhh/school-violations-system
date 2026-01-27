@@ -75,7 +75,7 @@
                                     <th class="py-3 text-muted text-nowrap">RECORD</th>
                                     <th class="py-3 text-muted text-nowrap">STATUS</th>
                                     <th class="py-3 text-muted text-nowrap">SANCTION</th>
-                                    <th class="text-center py-3 text-muted text-nowrap">ACTIONS</th>
+                                    <th class="text-center py-3 text-muted text-nowrap">APPEAL</th>
                                 </tr>
                             </thead>
                             <tbody>
